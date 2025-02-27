@@ -2,6 +2,14 @@ extends CharacterBody2D
 
 
 const SPEED = 300.0
+var currentHealth: int = 3
+
+func _on_hurt_box_area_entered(area):
+	if area.name == "hitBox":
+		currentHealth -= 1
+		print_debug(currentHealth)
+		if currentHealth <= 0:
+			get_tree().reload_current_scene()
 
 func _physics_process(delta: float) -> void:
 

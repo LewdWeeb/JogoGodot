@@ -256,24 +256,31 @@ size = Vector2(30, 41)
 [node name="Main" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(483.521, 318.563)
 script = ExtResource("1_3lnvp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 sprite_frames = SubResource("SpriteFrames_41k7w")
 animation = &"down"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+[node name="hurtBox" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/hurtBox"]
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_bikgl")
 
 [node name="Enemy" type="CharacterBody2D" parent="."]
-position = Vector2(67.5625, 0.260044)
+position = Vector2(630.599, 317.149)
 script = ExtResource("3_p7j25")
 
 [node name="AnimatedEnemy" type="AnimatedSprite2D" parent="Enemy"]
 sprite_frames = SubResource("SpriteFrames_ckpv4")
 animation = &"left"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
-position = Vector2(-0.562454, 3.23996)
+[node name="hitBox" type="Area2D" parent="Enemy"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/hitBox"]
+position = Vector2(-0.562439, 3.23996)
 shape = SubResource("RectangleShape2D_n1fwa")
+
+[connection signal="area_entered" from="Player/hurtBox" to="Player" method="_on_hurt_box_area_entered"]
